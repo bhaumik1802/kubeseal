@@ -24,10 +24,14 @@ Storing the public key and the secrets in the repository are safe, even if the r
 ============
 
 kubectl config set-context --current --namespace=anz
+
 shahs@shahs-JSS1471:~/Kafka/Kubeseal$ kubectl create secret generic mysecret --dry-run --from-literal=password=supersekret -o json | kubeseal --cert kubeseal-docker-desktop.pem > mysealedsecret.json
+
 shahs@shahs-JSS1471:~/Kafka/Kubeseal$ kubectl create -f mysealedsecret.jsonsealedsecret.bitnami.com/mysecret created
+
 shahs@shahs-JSS1471:~/Kafka/Kubeseal$ k apply -f sealedsecret.yaml -n anz
 pod/mypod created
+
 shahs@shahs-JSS1471:~/Kafka/Kubeseal$ k exec -it mypod /bin/bash -n anz
 root@mypod:/data# cd /etc/foo/
 root@mypod:/etc/foo# ls
